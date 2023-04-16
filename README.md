@@ -189,6 +189,8 @@ getOrderStatus() is vulnerable to HTML injection (XSS) in addition to SQL inject
 Recommended action:
 - Sanitize API input to prevent HTML injection.
 
+There is no way to delete data thru the API. For now this can be ignored.
+
 ## Changes to the Code
 
 Not all recommended actions are implemented, only those asked for in the assignment are.

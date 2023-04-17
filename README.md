@@ -198,25 +198,30 @@ the value is purposely immutable.
 
 Not all recommended actions are implemented, only those asked for in the assignment are.
 
-### Input Sanitization Strategy
-
-#### Numbers
-
-- Range of datatype: no negative prices or account balances are allowed.
-- Precision of floats: in the case of the price and account balance, floats must be limited to 2 decimal places (the cents).
-- Ensuring all characters are numeric will prevent SQL injection from numbers.
+### Input Sanitization Strategy - src/handlers/sanitize.ts
 
 #### Strings
 
-- No names or authors may be over 100 bytes long.
-- No titles may be over 500 bytes long.
-- Special characters that could be used for SQL/HTML injection are disallowed.
+- Special characters that could be used for SQL/HTML injection are disallowed. They are mapped to other substrings.
+
+#### Integers (further checks)
+
+- Ensuring all characters are numeric.
+
+#### Floats (further checks)
+
+- Range of datatype: no negative prices are allowed. (This is implicitly checked by ensuring characters are numeric).
+- Precision of floats: in the case of the price, floats must be 2 decimal places (the cents).
+- Values before and after the decimal must be numeric.
+- The string is split on periods as the delimiter. Nothing is allowed after the first and second section.
 
 #### Rejection Feedback to User
 
 The response will contain notification of the input rule that was broken. This constitutes explanation of valid input.
 
-As per the instructions, erroneous input will not be corrected, the user will have to try again.
+As per the instructions, erroneous input will not be corrected, the user will have to try again. However, sanitized strings
+will not be rejected (just mapped) because those special characters that can be used for injection attacks could possibly
+be part of names/titles/etc.
 
 ### db/customers.ts
 
@@ -226,6 +231,4 @@ As per the instructions, erroneous input will not be corrected, the user will ha
 
 ### db/purchaseOrders.ts
 
-- shipPo should have uppercase O (not yet implemented)
-- shipPO should have a check on customer balance before shipping (not yet implemented)
 - (bugfix) createPurchaseOrder() added missing question mark.

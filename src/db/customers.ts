@@ -29,7 +29,12 @@ export const customerBalance = async (cid: number): Promise<number> => {
     return result.accountBalance;
 }
 
-export const chargeCustomerForPO = async (pid: number) => {
-    // todo
-    return;
+export const chargeCustomerForPO = async (pid: number): Promise<void> => {
+    const db = await connect();
+    const cid = await db.get(`SELECT customerId FROM PurchaseOrders WHERE id = ?`, [pid]);
+    const bid = await db.get(`SELECT bookId FROM PurchaseOrders WHERE id = ?`, [pid]);
+	const price = await db.get(`SELECT price FROM Books WHERE id = ?`, [bid]);
+	let custBal = await customerBalance(cid);
+	custBal -= price;
+    await db.run(`UPDATE Customers SET accountBalance = ? WHERE id = ?`, [custBal, cid]);
 }

@@ -220,7 +220,8 @@ As per the instructions, erroneous input will not be corrected, the user will ha
 
 ### db/customers.ts
 
-- chargeCustomerForPO() (not yet implemented)
+- chargeCustomerForPO() implemented.
+- (bugfix) give user an account balance. (not yet implemented)
 
 ### db/purchaseOrders.ts
 

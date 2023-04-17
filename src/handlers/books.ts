@@ -14,7 +14,7 @@ export const createBook = async (req: Request, res: Response) => {
 	//Float checking
 	if (!validateFloat(price)){
 		res.status(400).json({ 'status': 'failure - price must be numeric and include the cents.' });
-		log(price + " was not numeric");
+		log("price " + price + " was not numeric");
 		return;
 	}
 
@@ -35,6 +35,6 @@ export const getPrice = async (req: Request, res: Response) => {
 		res.status(200).json({ price });
 	}catch (error){
 		res.status(400).json({ 'status': 'failure - query did not find anything with that title and author' });
-		log(title + ", " + author + " did not find record in db");
+		log("title " + title + ", author " + author + " did not find record in db");
 	}
 }

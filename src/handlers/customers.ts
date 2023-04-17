@@ -24,7 +24,7 @@ export const updateCustomerAddress = async (req: Request, res: Response) => {
 	//Int checking
 	if (!validateInt(cid)){
 		res.status(400).json({ 'status': 'failure - cid must be numeric' });
-		log(cid + " not numeric");
+		log("cid " + cid + " not numeric");
 		return;
 	}
 
@@ -38,7 +38,7 @@ export const getCustomerBalance = async (req: Request, res: Response) => {
 	//Int checking
 	if (!validateInt(cid)){
 		res.status(400).json({ 'status': 'failure - cid must be numeric' });
-		log(cid + " not numeric");
+		log("cid " + cid + " not numeric");
 		return;
 	}
 
@@ -47,6 +47,6 @@ export const getCustomerBalance = async (req: Request, res: Response) => {
 		res.status(200).json({ balance });
 	}catch (error){
 		res.status(400).json({ 'status': 'failure - a query did not find anything with that cid' });
-		log(cid + " did not find any records in database");
+		log("cid " + cid + " did not find any records in database");
 	}
 }

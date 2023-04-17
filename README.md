@@ -228,3 +228,4 @@ As per the instructions, erroneous input will not be corrected, the user will ha
 
 - shipPo should have uppercase O (not yet implemented)
 - shipPO should have a check on customer balance before shipping (not yet implemented)
+- (bugfix) createPurchaseOrder() added missing question mark.

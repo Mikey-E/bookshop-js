@@ -191,6 +191,9 @@ Recommended action:
 
 There is no way to delete data thru the API. For now this can be ignored.
 
+There is no way to some data values e.g. book prices. It is assumed that if this functionality is missing, then that implies
+the value is purposely immutable.
+
 ## Changes to the Code
 
 Not all recommended actions are implemented, only those asked for in the assignment are.

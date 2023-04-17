@@ -2,7 +2,7 @@ import { connect } from './db';
 
 export const createCustomer = async (name: string, address: string): Promise<number> => {
     const db = await connect();
-    await db.run(`INSERT INTO Customers (name, shippingAddress) VALUES (?, ?)`, [name, address]);
+    await db.run(`INSERT INTO Customers (name, shippingAddress, accountBalance) VALUES (?, ?, ?)`, [name, address, 0]);
     return getCustomerId(name, address);
 }
 

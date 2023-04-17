@@ -221,7 +221,8 @@ As per the instructions, erroneous input will not be corrected, the user will ha
 ### db/customers.ts
 
 - chargeCustomerForPO() implemented.
-- (bugfix) give user an account balance. (not yet implemented)
+- (bugfix) give user an account balance starting at 0.
+	- Assumption: Customers can be charged and get a negative balance i.e. owe the store money.
 
 ### db/purchaseOrders.ts
 

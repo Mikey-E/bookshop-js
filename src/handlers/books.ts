@@ -2,6 +2,7 @@ import { Request, Response } from 'express';
 import * as db from '../db';
 
 import { sanitizeString, validateFloat } from "./sanitize";//new
+import { log } from './logging';
 
 export const createBook = async (req: Request, res: Response) => {
     const { title, author, price } = req.body;
@@ -13,6 +14,7 @@ export const createBook = async (req: Request, res: Response) => {
 	//Float checking
 	if (!validateFloat(price)){
 		res.status(400).json({ 'status': 'failure - price must be numeric and include the cents.' });
+		log(price + " was not numeric");
 		return;
 	}
 
@@ -33,5 +35,6 @@ export const getPrice = async (req: Request, res: Response) => {
 		res.status(200).json({ price });
 	}catch (error){
 		res.status(400).json({ 'status': 'failure - query did not find anything with that title and author' });
+		log(title + ", " + author + " did not find record in db");
 	}
 }

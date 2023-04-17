@@ -2,6 +2,7 @@ import { Request, Response } from "express";
 import * as db from "../db";
 
 import { sanitizeString, validateInt } from "./sanitize";//new
+import { log } from './logging';
 
 export const createOrder = async (req: Request, res: Response) => {
     const { title, author, name, shippingAddress } = req.body;
@@ -19,6 +20,7 @@ export const createOrder = async (req: Request, res: Response) => {
 		res.status(201).json({ 'status': 'success' });
 	}catch (error){
 		res.status(400).json({ 'status': 'failure - a query did not find all needed values with that title/author/name/address combination' });
+		log(title + ", " + author + ", " + name + ", " + shippingAddress + " did not find a record in database");
 	}
 }
 
@@ -39,6 +41,7 @@ export const getShipmentStatus = async (req: Request, res: Response) => {
 		res.status(200).json({ shipped });
 	}catch (error){
 		res.status(400).json({ 'status': 'failure - a query did not find all needed values for that title/author/name/address combination' });
+		log(title + ", " + author + ", " + name + ", " + shippingAddress + " did not find a record in database");
 	}
 }
 
@@ -48,6 +51,7 @@ export const shipOrder = async (req: Request, res: Response) => {
 	//Int checking
 	if (!validateInt(pid)){
 		res.status(400).json({ 'status': 'failure - pid must be numeric' });
+		log(pid + " was not numeric");
 		return;
 	}
 
@@ -56,6 +60,7 @@ export const shipOrder = async (req: Request, res: Response) => {
 		res.status(200).json({ 'status': 'success' });
 	}catch (error){
 		res.status(400).json({ 'status': 'failure - a query did not find anything for that pid' });
+		log(pid + " did not find anything in database");
 	}
 }
 
@@ -65,6 +70,7 @@ export const getOrderStatus = async (req: Request, res: Response) => {
 	//Int checking
 	if (!validateInt(cid) || !validateInt(bid)){
 		res.status(400).json({ 'status': 'failure - cid and bid must be numeric' });
+		log(cid + " was not numeric");
 		return;
 	}
 
@@ -91,5 +97,6 @@ export const getOrderStatus = async (req: Request, res: Response) => {
 		`));
 	}catch (error){
 		res.status(400).json({ 'status': 'failure - a query did not find all needed values for that bid and cid' });
+		log(cid + ", " + bid + " did not find anything in the database");
 	}
 }

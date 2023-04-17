@@ -18,7 +18,7 @@ export const createOrder = async (req: Request, res: Response) => {
 		await db.createPurchaseOrder(bid, cid);
 		res.status(201).json({ 'status': 'success' });
 	}catch (error){
-		res.status(400).json({ 'status': 'failure - a query did not find all needed values for that title/author/name/address' });
+		res.status(400).json({ 'status': 'failure - a query did not find all needed values with that title/author/name/address combination' });
 	}
 }
 
@@ -38,7 +38,7 @@ export const getShipmentStatus = async (req: Request, res: Response) => {
 		const shipped = await db.isPoShipped(pid);
 		res.status(200).json({ shipped });
 	}catch (error){
-		res.status(400).json({ 'status': 'failure - a query did not find all needed values for that title/author/name/address' });
+		res.status(400).json({ 'status': 'failure - a query did not find all needed values for that title/author/name/address combination' });
 	}
 }
 
@@ -90,6 +90,6 @@ export const getOrderStatus = async (req: Request, res: Response) => {
 		</html>
 		`));
 	}catch (error){
-		res.status(400).json({ 'status': 'failure - a query did not find all needed values for that bid or cid' });
+		res.status(400).json({ 'status': 'failure - a query did not find all needed values for that bid and cid' });
 	}
 }

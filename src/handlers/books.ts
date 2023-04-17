@@ -32,6 +32,6 @@ export const getPrice = async (req: Request, res: Response) => {
 		const price = await db.getBookPrice(bid);
 		res.status(200).json({ price });
 	}catch (error){
-		res.status(400).json({ 'status': 'failure - query did not find anything with that title or author' });
+		res.status(400).json({ 'status': 'failure - query did not find anything with that title and author' });
 	}
 }
